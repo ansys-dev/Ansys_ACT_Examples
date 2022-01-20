@@ -1,0 +1,72 @@
+<extension name="ExtCustomControl" version="20" minorversion="1" icon="images/btn.png">
+  <author>小田老师@ANSYS仿真与开发</author>
+  <description>演示如何自定义按钮组件</description>
+  <script src="main.py" />
+  <interface context="Project">
+    <images>images</images>
+  </interface>
+
+  <uidefinition>
+    <layout name="ButtonLayout">
+      <component name="Title" componentType="startPageHeaderComponent"
+        topAttachment="" topoffset="10" bottomAttachment="Steps" bottomoffset=""
+        leftAttachment="" leftoffset="10" rightAttachment="" rightoffset=""
+        widthType="Percentage" width="100" heightType="FitToContent" height="100"/>
+      <component name="Steps" componentType="stepsListComponent"
+        topAttachment="Title" topoffset="10" bottomAttachment="Submit" bottomoffset="10"
+        leftAttachment="" leftoffset="10" rightAttachment="Properties" rightoffset=""
+        widthType="Percentage" width="25" heightType="Percentage" height="100"/>      
+      <component name="Properties" componentType="propertiesComponent"
+        topAttachment="Title" topoffset="10" bottomAttachment="Submit" bottomoffset=""
+        leftAttachment="Steps" leftoffset="" rightAttachment="Help" rightoffset=""
+        widthType="Percentage" width="40" heightType="Percentage" height="90"/>
+      <component name="CustomButton" componentType="buttonsComponent"
+        topAttachment="Properties" topoffset="10" bottomAttachment="Submit" bottomoffset=""
+        leftAttachment="Steps" leftoffset="" rightAttachment="Help" rightoffset=""
+        widthType="Percentage" width="40" heightType="Percentage" height="10"/> 
+      <component name="Help" componentType="helpContentComponent"
+        topAttachment="Title" topoffset="10" bottomAttachment="Submit" bottomoffset=""
+        leftAttachment="Properties" leftoffset="" rightAttachment="" rightoffset="10"
+        widthType="Percentage" width="35" heightType="Percentage" height="100"/>   
+      <component name="Submit" componentType="buttonsComponent"
+        topAttachment="Steps" topoffset="10" bottomAttachment="" bottomoffset=""
+        leftAttachment="" leftoffset="10" rightAttachment="" rightoffset="10"
+        widthType="Percentage" width="100" heightType="FitToContent" height="100"/>          
+    </layout>
+    <layout name="DialogLayout">
+      <component name="Image" componentType="imageComponent"
+        topAttachment="" topoffset="10" bottomAttachment="Buttons" bottomoffset=""
+        leftAttachment="" leftoffset="20" rightAttachment="Text" rightoffset=""
+        widthType="Percentage" width="20" heightType="Fixed" height="64" />
+      <component name="Text" componentType="htmlComponent"
+        topAttachment="" topoffset="20" bottomAttachment="Buttons" bottomoffset=""
+        leftAttachment="Image" leftoffset="" rightAttachment="" rightoffset=""
+        widthType="Percentage" width="80" heightType="FitToContent" height="50" minHeight="50"/> 
+      <component name="Buttons" componentType="buttonsComponent"
+        topAttachment="Text" topoffset="" bottomAttachment="" bottomoffset=""
+        leftAttachment="Image" leftoffset="" rightAttachment="" rightoffset=""
+        widthType="Percentage" width="100" heightType="FitToContent" height="50"/>       
+    </layout>
+  </uidefinition>
+  
+  <wizard name="ButtonWizard" caption="Button Wizard" version="1" context="Project" icon="btn.png">
+    <description>自定义按钮案例</description>   
+    <step name="ControlStep" caption="Custom Control" version="1" helpFile="help/CustomHelp.html" 
+      layout="ButtonLayout@ExtCustomControl">
+      <propertygroup name="cbxNameType" display="property" control="select" caption="Specify Analysis Name">
+        <attributes options="Simple Analysis,User Defined"/>
+        <property name="userDefinedName" caption="User Defined Name" control="text" visibleon="User Defined"/>
+      </propertygroup>
+      <property name="userCtrl" caption="User Control" control="select" >
+        <callbacks>
+          <onapply>onApplyUserCtrl</onapply>
+        </callbacks>
+      </property>
+      <callbacks>
+        <onrefresh>onRefresh_ButtonStep</onrefresh>
+        <onupdate>onUpdate_ButtonStep</onupdate>
+        <onreset>onReset_ButtonStep</onreset>
+      </callbacks>     
+    </step> 
+  </wizard>
+</extension>

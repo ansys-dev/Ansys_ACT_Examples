@@ -1,0 +1,26 @@
+<extension version="1" name="InputValidation" icon="images/valid.png">
+  <author>小田老师@ANSYS仿真与开发</author>
+  <script src="main.py"/>
+  <description>Input validation Demo</description> 
+  <interface context="SpaceClaim|Mechanical|Project|Fluent">
+    <images>images</images>
+  </interface>  
+  <wizard name="InputValidWizard" version="1" context="SpaceClaim|Mechanical|Project|Fluent" icon="valid.png">
+    <step name="InputStep" caption="Input" version="1">       
+      <property name="numInput" control="float" caption="Number Input" default="20">
+        <callbacks>
+          <IsValid>IsNumInputValid</IsValid>
+        </callbacks>
+      </property>
+      <property name="txtInput" control="text" caption="Text Input" default="SimProject">
+        <callbacks>
+          <IsValid>IsTextInputValid</IsValid>
+        </callbacks>
+      </property>   
+    <callbacks>
+      <onupdate>onInputStepUpdate</onupdate>
+    </callbacks>    
+    </step>  
+  </wizard>  
+</extension>
+

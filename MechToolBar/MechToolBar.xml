@@ -1,0 +1,22 @@
+<extension name="MechToolBar" minorversion="1" version="2020" icon="images/tool.png">
+  <author>小田老师@ANSYS仿真与开发</author>
+  <description>Mechanical User Define Toolbar</description>
+  <guid>6a97fd81-e49d-4326-9262-a5353649168c</guid>
+  <script src="main.py" compiled="true"/>
+  <interface context="Mechanical">
+    <images>images</images>
+    <toolbar name="userTools" caption="UserTools">
+      <entry name="exportRes" caption="Export Results" icon="saveIco">
+        <callbacks>
+          <onclick>exportRes_clicked</onclick>
+        </callbacks>
+      </entry>
+      <separator />
+      <entry name="aboutMe" caption="About" icon="about">
+        <callbacks>
+          <onclick>aboutMe_clicked</onclick>
+        </callbacks>
+      </entry>
+    </toolbar>
+  </interface>
+</extension>

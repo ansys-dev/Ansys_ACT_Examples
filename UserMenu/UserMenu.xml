@@ -1,0 +1,15 @@
+<extension name="UserMenu" loadAsDefault="true" icon="images/menu.png">
+  <guid>d1cefc34-e0aa-44cd-8147-8d137da0e79e</guid>
+  <script src="main.py" />
+  <interface context="Project">
+    <images>images</images>
+     <callbacks>
+      <OnInit>CreateMenu</OnInit>
+      <OnTerminate>RemoveMenu</OnTerminate>
+    </callbacks>
+  </interface>
+  <author>ANSYS仿真与开发</author>
+  <description>菜单栏工具创建演示</description>
+</extension>
+
+

@@ -1,0 +1,25 @@
+
+<extension name="ScopingDemo" version="1" icon="images/select.png">
+  <author>小田老师@ANSYS仿真与开发</author>
+  <description>演示ACT中如何实现交互选择</description>
+  <script src="main.py" />
+  
+  <interface context="Mechanical|SpaceClaim">
+    <images>images</images>
+  </interface>
+  
+  <wizard name="Wizard" caption="交互选择演示" version="1" context="Mechanical" icon="select.png">
+    <step name="stepLoad" version="1" caption="载荷加载" >
+      <property name="fixLoc" caption="FixSupport Location" control="geometry_selection" >
+        <attributes selection_filter="face|vertex" />
+      </property>
+      <property name="pressLoc" caption="Pressure Location" control="geometry_selection" />
+      <property name="pressVal" caption="Pressure Magnitude" unit="Pressure" control="float" />
+      <callbacks>
+        <onupdate>stepLoad_onupdate</onupdate>
+      </callbacks>
+    </step>
+  </wizard>
+  
+</extension>
+

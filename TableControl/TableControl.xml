@@ -1,0 +1,86 @@
+<extension name="TableControl" version="1" icon="images/table.png">
+  <author>小田老师@ANSYS仿真与开发</author>
+  <script src="main.py" compiled="true"/>
+  
+  <interface context="Project|Mechanical|SpaceClaim|Fluent">
+    <images>images</images>
+  </interface>
+  
+  <uidefinition>
+    <layout name="Table">
+      <component name="Title" componentType="startPageHeaderComponent" 
+        topOffset="10" leftOffset="10" rightOffset="10" bottomOffset="10"
+        bottomAttachment="Properties" widthType="Percentage" width="100" 
+        heightType="FitToContent" height="100" />
+      <component name="Steps" componentType="stepsListComponent" 
+        topAttachment="Title" bottomAttachment="FreqHtml" leftOffset="10" 
+        rightAttachment="TabularData" widthType="Percentage" width="30" 
+        heightType="Percentage" height="45"/>
+      <component name="Properties" componentType="propertiesComponent" 
+        topAttachment="Title" leftAttachment="Steps" rightOffset="10" 
+        widthType="Percentage" width="70" heightType="Percentage" 
+        height="20"/>
+      <component name="TabularData" componentType="tabularDataComponent" 
+        rightOffset="10" topAttachment="Properties" leftAttachment="Steps" 
+        bottomAttachment="FreqChart" widthType="Percentage" width="70" 
+        heightType="Percentage" height="25"/>
+      <component name="FreqHtml" componentType="htmlComponent" 
+        topAttachment="TabularData" rightAttachment="FreqChart" 
+        leftOffset="10" bottomAttachment="Submit" widthType="Percentage" 
+        width="30" heightType="Percentage" height="54"/>
+      <component name="FreqChart" componentType="chartComponent" 
+        topAttachment="TabularData" leftAttachment="FreqHtml" 
+        rightOffset="10" bottomAttachment="Submit" widthType="Percentage" 
+        width="70" heightType="Percentage" height="54"/>
+      <component name="Submit" componentType="buttonsComponent" 
+        topAttachment="FreqHtml" bottomOffset="10" leftOffset="10" 
+        rightOffset="10" widthType="Percentage" width="100" 
+        heightType="FitToContent" height="50" />
+    </layout>
+  </uidefinition>
+  
+  <wizard name="tableWizard" caption="Table Wizard" version="1" icon="table.png"
+    context="Project|Mechanical|SpaceClaim|Fluent" >
+    <step name="tableStep" caption="Table" version="1" layout="Table@TableControl">
+      <componentStyle component="Submit">
+        <background-color>#b6d7a8</background-color>
+      </componentStyle>
+      <property name="projectName" caption="Project Name" control="text" />
+
+      <propertytable name="freqTableA" caption="TableA: Freq - Acc" control="custom" 
+        display="worksheet" class="Worksheet.TabularDataEditor.TabularDataEditor">
+        <property name="freqA" caption="Freq" unit="Frequency" control="float" />
+        <property name="accA" caption="Acc" unit="Acceleration" control="float" />
+        <callbacks>
+          <onapply>onFreqTableA_Apply</onapply>
+        </callbacks>
+      </propertytable>
+
+			<propertytable name="freqTableB" caption="TableB: Freq - Acc" display="worksheet" 
+        control="applycancel" class="Worksheet.PropertyGroupEditor.PGEditor">
+				<!-- unit参照 Ansys.Core.Units.QuantityNames -->
+        <property name="freqB" caption="Freq" unit="Frequency" control="float" />
+        <property name="accB" caption="Acc" unit="Acceleration" control="float" />
+        <callbacks>
+          <onapply>onFreqTableB_Apply</onapply>
+        </callbacks>
+      </propertytable>
+
+      <propertytable name="matTable"  caption="Materials" control="tabulardata" 
+        display="worksheet">
+        <property name="matName" caption="材料名称" control="text" />
+        <property name="density" caption="密度" unit="Density" control="float" />
+        <property name="tensile" caption="抗拉屈服强度" unit="Pressure" control="float" />
+        <property name="young" caption="杨氏模量" unit="Pressure" control="float" />
+        <property name="poisson" caption="泊松比" control="float" />
+      </propertytable>
+      
+      <callbacks>
+        <onupdate>onTableStepUpdate</onupdate>
+        <oninit>onTableStepInit</oninit>
+      </callbacks>
+      
+    </step>
+  </wizard>
+  
+</extension>

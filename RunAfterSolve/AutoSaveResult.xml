@@ -1,0 +1,15 @@
+<extension name="AutoSaveResult" version="20" minorversion="1" loadAsDefault="true" icon="images/app.png">
+  <guid>6C08D11F-A2C2-4B2D-9831-19804D9D3709</guid>
+  <author>小田老师@ANSYS仿真与开发</author>
+  <description>结果自动保存输出工具</description>
+  <script src="main.py" compiled="true" />
+  
+  <interface context="Mechanical">
+    <images>images</images>
+    <callbacks>
+      <onpostfinished>AutoExportResults</onpostfinished>
+    </callbacks>
+  </interface>
+    
+</extension>
+
