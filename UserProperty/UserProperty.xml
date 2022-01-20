@@ -1,0 +1,44 @@
+<extension name="UserProperty" version="1" icon="images/app.png">
+  <author>tguangs@163.com</author>
+  <description>User Defined Property</description>
+  <script src="main.py" />
+
+  <interface context="SpaceClaim|Project|Mechanical|Fluent">
+    <images>images</images>
+  </interface>
+  
+  <wizard name="PropWizard" version="1" caption="Property Wizard"
+    context="SpaceClaim|Project|Mechanical|Fluent" icon="app">
+    <step name="propStep" caption="User Prop" version="1">
+      <!-- 使用属性控制类自定义控件交互功能 -->
+      <property name="fileSave1" control="filesave" >
+        <attributes 
+          filters="Workbench Project Files (*.wbpj)|*.wbpj|All Files(*.*)|*.*" />
+      </property>
+      <!-- 使用回调函数自定义属性控件交互功能 -->
+      <property name="fileSave2" control="custom">
+        <attributes buttonLabel="Browse"
+          filters="Workbench Project Files (*.wbpj)|*.wbpj|All Files(*.*)|*.*" />
+        <callbacks>
+          <onactivate>onFileSaveActivate</onactivate>
+          <onshow>onFileSaveShow</onshow>
+        </callbacks>
+      </property>
+    </step>
+  </wizard>
+
+  <templates>
+    <!-- File Save -->
+    <controltemplate name="filesave" version="1">
+      <!--
+      Available Attributes:
+        (Optional) filters: "Text files (*.txt)|*.txt|All files (*.*)|*.*"
+      -->
+      <property name="Filename" caption="Filename" control="custom" class="FileSaveObj">
+        <attributes buttonLabel="Browse"/>
+      </property>
+    </controltemplate>
+
+  </templates>
+
+</extension>
